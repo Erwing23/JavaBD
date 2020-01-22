@@ -111,6 +111,8 @@ public class VentanaPrincipal {
         Button btnGuardar = new Button("Siguiente");
         btnGuardar.setOnAction(e->{
             manejarFormulario();
+            VentanaBusqueda vbusq = new VentanaBusqueda();
+            btnGuardar.getScene().setRoot(vbusq.getRoot());
            
             
         });

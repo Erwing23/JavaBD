@@ -21,6 +21,7 @@ import javafx.scene.layout.VBox;
 import modelo.Cliente;
 import modelo.TipoReservas;
 import java.time.LocalDate;
+import javafx.collections.ObservableList;
 import modelo.Reserva;
 
 /**
@@ -29,14 +30,8 @@ import modelo.Reserva;
  */
 public class VentanaBusqueda {
     VBox root;
-    TextField email;
-    
-    TextField txtNombres;
-    TextField txtApellidos;
-    TextField txtEmail;
-   
 
-    ComboBox cmbEstado;
+    ComboBox cmbReserva;
     
     public VentanaBusqueda(){
         createContent();
@@ -46,55 +41,15 @@ public class VentanaBusqueda {
         
         Label titulo = new Label("Reservacion");
         titulo.setId("titulo");
-    
-        
-      /*  HBox cntCedula = new HBox(5);
-        Label lblCedula = new Label("Cedula");
-        txtCedula = new TextField();
-        
-        
-        
-        //cntCedula.getChildren().addAll(lblCedula,txtCedula);
- 
-        form1.add(lblCedula,0,0);
-        form1.add(txtCedula,1,0);*/
-       GridPane form1 = new GridPane();
-     
-        
-        HBox cntNombres = new HBox(5);
-        Label lblNombres = new Label("Nombres");
-        txtNombres = new TextField();
-        form1.add(lblNombres, 0, 1);
-        form1.add(txtNombres, 1, 1);
-        //cntNombres.getChildren().addAll(lblNombres,txtNombres);
-     
-        
-
-        Label lblApellidos = new Label("Apellidos");
-        txtApellidos = new TextField();
-   
-        Label lblEmail = new Label("Email");
-        txtEmail = new TextField();
-  
-        form1.add(lblApellidos,2,1);
-        form1.add(txtApellidos,3,1);
-        form1.add(lblEmail,0,2);
-        form1.add(txtEmail,1,2);
-    
-        
-        form1.setVgap(15);
-        form1.setHgap(25);
-        form1.setPadding(new Insets(25));
-        
-      
-        
-        
+        Label reserva = new Label("Que tipo de reserva deseas?");
+        root.setPadding(new Insets(25));
+        ComboBox cmbReserva = new ComboBox();
+        cmbReserva.getItems().setAll(TipoReservas.values());
+        root.getChildren().add(titulo);
+        root.getChildren().add(cmbReserva);
         HBox cntBotones = new HBox(5);
         Button btnGuardar = new Button("Consultar");
-        btnGuardar.setOnAction(e->{
-            manejarFormulario();
-           
-            
+        btnGuardar.setOnAction(e->{ 
         });
         Button btnCerrar = new Button("Cerrar");
         btnCerrar.setOnAction(e->{btnCerrar.getScene().getWindow().hide();});
@@ -102,9 +57,8 @@ public class VentanaBusqueda {
      
         cntBotones.getChildren().addAll(btnGuardar,btnCerrar);
         titulo.setAlignment(Pos.CENTER);
-        form1.setAlignment(Pos.CENTER);
+        
         cntBotones.setAlignment(Pos.CENTER);
-        root.getChildren().addAll(titulo,form1,cntBotones);
         root.setAlignment(Pos.CENTER);
         
     }
@@ -112,31 +66,5 @@ public class VentanaBusqueda {
     public VBox getRoot() {
         return root;
     }
-           private void manejarFormulario(){
-    
-        String nombres = txtNombres.getText();
-        String apellidos = txtApellidos.getText();
-        String email = txtEmail.getText();
-        
-
-        if(nombres.trim().length() >0 && apellidos.trim().length() >0&& email.trim().length()>0){
-            Cliente cliente = new Cliente(nombres,apellidos,email);
-            System.out.println(cliente);
-   
-         
-            
-            
-             }
-
-        
-        else{
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("Error Dialog");
-            alert.setHeaderText("Ingreso de Reserva");
-            alert.setContentText("Todos los campos son obligatorios");
-            alert.showAndWait();
-            
-        }
-    }
-    
+           
 }

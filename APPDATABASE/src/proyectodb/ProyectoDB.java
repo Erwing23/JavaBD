@@ -5,6 +5,9 @@
  */
 package proyectodb;
 
+import java.lang.invoke.MethodHandles;
+import java.sql.Connection;
+import java.sql.DriverManager;
 import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -22,8 +25,16 @@ public class ProyectoDB extends Application {
     
     @Override
     public void start(Stage primaryStage) {
-   
         
+        
+        Connection con = null;
+        try{
+            con= DriverManager.getConnection("jbdc:mysql://localhost:3306/login","root","roo");
+            if(con !=null)
+                System.out.println("Exito de conexión");
+        }catch(Exception e){
+            System.out.println("Error en la conexión");
+    }
        VentanaPrincipal ventp = new VentanaPrincipal();
         
         Scene scene = new Scene(ventp.getRoot(),900,800);

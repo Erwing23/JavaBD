@@ -5,6 +5,8 @@
  */
 package ventanas;
 
+import java.sql.Connection;
+import java.sql.DriverManager;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Alert;

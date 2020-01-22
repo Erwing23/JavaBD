@@ -5,6 +5,8 @@
  */
 package ventanas;
 
+import java.sql.Connection;
+import java.sql.DriverManager;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Alert;
@@ -127,6 +129,8 @@ public class VentanaPrincipal {
         cntBotones.setAlignment(Pos.CENTER);
         root.getChildren().addAll(titulo,form1,cntBotones);
         root.setAlignment(Pos.CENTER);
+        
+       
         
     }
 

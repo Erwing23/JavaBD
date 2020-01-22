@@ -9,13 +9,16 @@ import java.lang.invoke.MethodHandles;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import javafx.application.Application;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
+import modelo.Vuelo;
 import ventanas.VentanaPrincipal;
+import ventanas.viewVuelo;
 
 /**
  *
@@ -35,10 +38,11 @@ public class ProyectoDB extends Application {
         }catch(Exception e){
             System.out.println("Error en la conexión");
     }
-       VentanaPrincipal ventp = new VentanaPrincipal();
-        
-        Scene scene = new Scene(ventp.getRoot(),900,800);
-        
+      VentanaPrincipal ventp = new VentanaPrincipal();
+    
+     viewVuelo vuelos = new viewVuelo();
+      //  Scene scene = new Scene(ventp.getRoot(),900,800);
+        Scene scene = new Scene(vuelos.getRoot(),900,800);
         primaryStage.setTitle("RESERVA");
         primaryStage.setScene(scene);
         primaryStage.show();

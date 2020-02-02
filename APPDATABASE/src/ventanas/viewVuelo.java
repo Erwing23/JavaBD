@@ -8,9 +8,11 @@ package ventanas;
 import java.util.Date;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 import modelo.Vuelo;
@@ -21,7 +23,7 @@ import modelo.Vuelo;
  */
 public class viewVuelo {
 
-    private StackPane root;
+    private BorderPane root;
     private Stage s;
 
     public viewVuelo() {
@@ -29,7 +31,7 @@ public class viewVuelo {
     }
 
     public void create() {
-        root = new StackPane();
+        root = new BorderPane();
         TableView<Vuelo> table = new TableView<>();
         TableColumn<Vuelo, String> idCol = new TableColumn<>("ID DE VUELO");
         TableColumn<Vuelo, String> asientoCol = new TableColumn<>("Número de Asiento");
@@ -46,12 +48,14 @@ public class viewVuelo {
         
         table.setItems(list);
         table.getColumns().addAll(idCol, asientoCol, clase, fechas);
-
+        Button next = new Button("Continuar");
+        
+                
         root.getChildren().addAll(table);
 
     }
 
-    public StackPane getRoot() {
+    public BorderPane getRoot() {
         return root;
     }
 

@@ -28,7 +28,7 @@ public class ProyectoDB extends Application {
     
     @Override
     public void start(Stage primaryStage) {
-        
+        /*
         
         Connection con = null;
         try{
@@ -37,7 +37,7 @@ public class ProyectoDB extends Application {
                 System.out.println("Exito de conexión");
         }catch(Exception e){
             System.out.println("Error en la conexión");
-    }
+    }*/
       VentanaPrincipal ventp = new VentanaPrincipal();
     
      viewVuelo vuelos = new viewVuelo();

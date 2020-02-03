@@ -18,6 +18,7 @@ import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 import modelo.Vuelo;
 import ventanas.VentanaPrincipal;
+import ventanas.login;
 import ventanas.viewVuelo;
 
 /**
@@ -39,10 +40,11 @@ public class ProyectoDB extends Application {
             System.out.println("Error en la conexión");
     }*/
       VentanaPrincipal ventp = new VentanaPrincipal();
-    
      viewVuelo vuelos = new viewVuelo();
-      //  Scene scene = new Scene(ventp.getRoot(),900,800);
-        Scene scene = new Scene(vuelos.getRoot(),900,800);
+     login log = new login();
+        //Scene scene = new Scene(ventp.getRoot(),900,800);
+        //Scene scene = new Scene(vuelos.getRoot(),900,800);
+        Scene scene = new Scene(log.getRoot(),1000,900);
         primaryStage.setTitle("RESERVA");
         primaryStage.setScene(scene);
         primaryStage.show();

@@ -18,8 +18,9 @@ public class Conexion {
       Connection con;
     public Conexion(){
         try {
+            System.out.println("Exito");
             Class.forName("com.mysql.cj.jdbc.Driver");
-            con=DriverManager.getConnection("jdbc:mysql://localhost:3306/booking","root","root");
+            con=DriverManager.getConnection("jdbc:mysql://localhost:3306/booking","root","roo");
         } catch (Exception e) {
             System.err.println("Error:" +e);
         }
@@ -30,9 +31,10 @@ public class Conexion {
         ResultSet rs;
         try {
             st=cn.con.createStatement();
-            rs=st.executeQuery("select * from aerolinea");
-            while (rs.next()) {                
-                System.out.println(rs.getInt("idAerolinea")+" " +rs.getString("idAvion")+" " +rs.getString("Nombre"));
+            rs=st.executeQuery("select * from cliente");
+            while (rs.next()) {   
+                System.out.println(rs.getClass());
+              //  System.out.println(rs.getInt("idAerolinea")+" " +rs.getString("idAvion")+" " +rs.getString("Nombre"));
             }
             cn.con.close();
         } catch (Exception e) {

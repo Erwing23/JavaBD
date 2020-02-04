@@ -82,7 +82,7 @@ public class vistaRest {
                 String dR=null;
         try {
             st=cn2.con.createStatement();
-            rs1=st.executeQuery("select * from restaurante ");
+            rs1=st.executeQuery("select * from restaurante where MesasDisp <>0; ");
             while (rs1.next()) { 
                 c=0;
                 f+=1;
@@ -110,7 +110,7 @@ public class vistaRest {
               //  System.out.println(rs.getInt("idAerolinea")+" " +rs.getString("idAvion")+" " +rs.getString("Nombre"));
             }
             
-            
+             cn2.con.close();
            
             
           
@@ -149,9 +149,12 @@ String ids = selectedRadioButton.getText();
       Conexion cn3=new Conexion();
         Statement st3;
         ResultSet rs3;
-        
+        Statement u1;
         
         try {
+            u1 = cn3.con.createStatement();
+                int ru1 = u1.executeUpdate("update Restaurante set MesasDisp=MesasDisp-1 where idRestaurante ='"+ids+"' ");
+            System.out.println(ru1);
             st3=cn3.con.createStatement();
             rs3=st3.executeQuery("select * from Restaurante where idRestaurante ='"+ids+"' ");
             while (rs3.next()) {  
@@ -166,20 +169,21 @@ String ids = selectedRadioButton.getText();
         Conexion cn=new Conexion();
         Statement st1;
          
-        int rs;
-         
-        try {
-            st1=cn.con.createStatement();
-           
-           //(`Reserva` (`idReserva`,`FechaLlegada`,`FechaSalida`,`idCliente`,`idEmpleado`) VALUES (1000,"20-01-06","20-02-03",269,328);
-           int s1 = 2000;
-           String s2 = registro.c.getId();
+        int rs; 
+        String s2 = registro.c.getId();
            Date s3 = new Date(0,0,0);
            Date s31 = new Date(1,1,1);
            
            int s4 = 2004;
            int ide = 328;
-            rs=st1.executeUpdate("INSERT INTO Reserva (idReserva,idCliente,FechaLlegada,FechaSalida,idEmpleado) VALUES('" +s1+ "','" + s2 + "','" + s3 + "','" + s31 + "','" + ide + "' )");
+         
+        try {
+            st1=cn.con.createStatement();
+           
+           //(`Reserva` (`idReserva`,`FechaLlegada`,`FechaSalida`,`idCliente`,`idEmpleado`) VALUES (1000,"20-01-06","20-02-03",269,328);
+          
+          
+            rs=st1.executeUpdate("INSERT INTO Reserva (idCliente,FechaLlegada,FechaSalida,idEmpleado) VALUES('" + s2 + "','" + s3 + "','" + s31 + "','" + ide + "' )");
             System.out.println("insert");
             System.out.println(rs);
           
@@ -195,7 +199,7 @@ String ids = selectedRadioButton.getText();
                    
                    Stage sm = new Stage();
                    VBox vp = new VBox();
-                   Label lp = new Label();
+                   Label lp = new Label("FELICIDADES HA CONFIRMADO SU");
         } catch (Exception se) {
         }//
              

@@ -21,6 +21,7 @@ import javafx.scene.layout.VBox;
 import modelo.Cliente;
 import modelo.TipoReservas;
 import java.time.LocalDate;
+import javafx.stage.Stage;
 import modelo.Reserva;
 
 /**
@@ -37,6 +38,7 @@ public class VentanaPrincipal {
     DatePicker fechasalida;
     TextField txtemail;
     TextField txttelefono;
+    public static String  city;
 
     ComboBox cmbEstado;
     
@@ -63,59 +65,20 @@ public class VentanaPrincipal {
  
         form1.add(lblCedula,0,0);
         form1.add(txtCedula,1,0);*/
-       GridPane form1 = new GridPane();
-     
-        
-        HBox cntNombres = new HBox(5);
-        Label lblNombres = new Label("Nombres");
-        txtNombres = new TextField();
-        form1.add(lblNombres, 0, 1);
-        form1.add(txtNombres, 1, 1);
-        //cntNombres.getChildren().addAll(lblNombres,txtNombres);
-     
-        
-
-        Label lblApellidos = new Label("Apellidos");
-        txtApellidos = new TextField();
-   
-        Label lblEmail = new Label("Email");
-        txtemail = new TextField();
-     
-        Label lblTelefono = new Label("Telefono");
-        txttelefono = new TextField();
-
-        form1.add(lblApellidos,2,1);
-        form1.add(txtApellidos,3,1);
-        form1.add(lblEmail,0,2);
-        form1.add(txtemail,1,2);
-        form1.add(lblTelefono,2,2);
-        form1.add(txttelefono,3,2);
-        
-        form1.setVgap(15);
-        form1.setHgap(25);
-        form1.setPadding(new Insets(25));
-        form1.add(lblEstado, 0, 3);
-        form1.add(cmbEstado, 1, 3);
-      
+    
         fechallegada = new DatePicker();
         Label lblLlegada = new Label("Fecha de Llegada");
-        form1.add(lblLlegada,0,4);
-        form1.add(fechallegada,1,4);
+      // form1.add(lblLlegada,0,4);
+        //form1.add(fechallegada,1,4);
         fechasalida = new DatePicker();
         Label lblSalida = new Label("Fecha de Salida");
-        form1.add(lblSalida,2,4);
-        form1.add(fechasalida,3,4);
+        //form1.add(lblSalida,2,4);
+        //form1.add(fechasalida,3,4);
         
         
         HBox cntBotones = new HBox(5);
         Button btnGuardar = new Button("Siguiente");
-        btnGuardar.setOnAction(e->{
-            manejarFormulario();
-            VentanaBusqueda vbusq = new VentanaBusqueda();
-            btnGuardar.getScene().setRoot(vbusq.getRoot());
-           
-            
-        });
+       
         Button btnCerrar = new Button("Cerrar");
         btnCerrar.setOnAction(e->{btnCerrar.getScene().getWindow().hide();});
         Button btnBuscar = new Button("Consultar mis reservas");
@@ -127,13 +90,53 @@ public class VentanaPrincipal {
      
         cntBotones.getChildren().addAll(btnGuardar,btnCerrar,btnBuscar);
         titulo.setAlignment(Pos.CENTER);
-        form1.setAlignment(Pos.CENTER);
+       // form1.setAlignment(Pos.CENTER);
         cntBotones.setAlignment(Pos.CENTER);
-        root.getChildren().addAll(titulo,form1,cntBotones);
-        root.setAlignment(Pos.CENTER);
+        root.getChildren().addAll(titulo);
+        root.getChildren().addAll(lblEstado,cmbEstado);
+       
+       
+        root.setSpacing(25);
+        GridPane g1 = new GridPane();
+         HBox hb = new HBox();
+         
+        
+        
+       cmbEstado.setOnAction(e->{
+           hb.getChildren().clear();
+          g1.getChildren().clear();
+            switch (cmbEstado.getSelectionModel().getSelectedItem().toString()) {
+                case "RESTAURANTE":
+                    System.out.println("hello");
+                     btnGuardar.setOnAction(a->{
+                         vistaRest v = new vistaRest();
+                         btnGuardar.getScene().setRoot(v.getRoot());
+           
+           
+            
+        });
+                    break;
+                case "HOTEL":
+                    HBox h = new HBox();
+                    Label l2 = new Label("Escriba la ciudad: ");
+                    TextField t1= new TextField();
+                    h.getChildren().addAll(l2,t1);
+                    hb.getChildren().add(h);
+                    break;
+                case "VUELO":
+                    break;
+                default:
+                    break;
+            }
+            hb.getChildren().add(cntBotones);
         
        
-        
+       });
+        root.getChildren().add(hb);
+         hb.setAlignment(Pos.CENTER);
+       root.setSpacing(25);
+         root.setAlignment(Pos.CENTER);
+         g1.setAlignment(Pos.CENTER);
     }
 
     public VBox getRoot() {

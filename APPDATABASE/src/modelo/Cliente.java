@@ -10,7 +10,7 @@ package modelo;
  * @author laptop
  */
 public class Cliente {
-    private int id;
+    private String id;
     private String nombre;
     private String apellidos;
     private String numero;
@@ -37,11 +37,11 @@ public class Cliente {
     }
 
     
-    public int getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(String id) {
         this.id = id;
     }
 

@@ -15,7 +15,7 @@ import java.sql.Statement;
  * @author laptop
  */
 public class Conexion {
-      Connection con;
+       public Connection con;
     public Conexion(){
         try {
             System.out.println("Exito");

@@ -5,6 +5,8 @@
  */
 package ventanas;
 
+import java.sql.ResultSet;
+import java.sql.Statement;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Alert;
@@ -16,6 +18,8 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import modelo.Cliente;
+import modelo.Conexion;
 
 /**
  *
@@ -23,6 +27,7 @@ import javafx.scene.layout.VBox;
  */
 public class registro {
     private VBox root ;
+    public static Cliente c ;
     public registro(){
         genera();
     
@@ -62,12 +67,56 @@ public class registro {
               root.setAlignment(Pos.CENTER);
               
               b1.setOnAction(e->{
-                  String s1 = t1.getText();
-                  String s2 = t2.getText();
-                  String s3 = t3.getText();
-                  String s4 = t4.getText();
+                  String s1 = t1.getText().toString();
+                  String s2 = t2.getText().toString();
+                  String s3 = t3.getText().toString();
+                  String s4 = t4.getText().toString();
                   if( !s1.equals("")  &&!s2.equals("")  && !s3.equals("")  &&!s4.equals("")   ){
                       System.out.println("vamos bien");
+                      c = new Cliente(s1,s2,s3,s4);
+        
+        //INSTRUCCION SQL              
+        Conexion cn=new Conexion();
+        Statement st1;
+         
+        int rs;
+         
+        try {
+            st1=cn.con.createStatement();
+           
+            System.out.println(s1+""+s2+""+s3+""+s4);
+            rs=st1.executeUpdate("INSERT INTO cliente (Nombres,Apellidos,Email,Celular) VALUES('" +s1+ "','" + s2 + "','" + s3 + "','" + s4  + "'  )");
+            System.out.println("insert");
+            System.out.println(rs);
+          
+            
+            cn.con.close();
+        } catch (Exception a) {
+            System.out.println(a.getMessage());
+        }
+      // INSTRUCCION SQL   
+      Conexion cn2=new Conexion();
+        Statement st;
+        ResultSet rs1;
+        String idc=null;
+        try {
+            st=cn2.con.createStatement();
+            rs1=st.executeQuery("select * from cliente where Nombres ='"+s1+"' and Apellidos ='"+s2+"' and Email ='"+s3+"'");
+            while (rs1.next()) {  
+                
+                idc= rs1.getString("idCliente");
+                System.out.println(rs1.getInt("idCliente"));
+                System.out.println(rs1.getClass());
+              //  System.out.println(rs.getInt("idAerolinea")+" " +rs.getString("idAvion")+" " +rs.getString("Nombre"));
+            }
+            
+            cn2.con.close();
+            c.setId(idc);
+            
+           VentanaPrincipal ventB = new VentanaPrincipal();
+                   b1.getScene().setRoot(ventB.getRoot());
+        } catch (Exception se) {
+        }//
                   }else{
                       System.out.println("vamos mal");
                    Alert alert = new Alert(Alert.AlertType.ERROR);
@@ -76,6 +125,7 @@ public class registro {
             alert.setContentText("Todos los campos son obligatorios");
             alert.showAndWait();
                   }
+                   
               
               
               });

@@ -16,6 +16,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.ScrollBar;
+import javafx.scene.control.ScrollPane;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -32,7 +33,7 @@ import static ventanas.registro.c;
  * @author erwin
  */
 public class vistaRest {
-    private  VBox root ;
+    private  ScrollPane root ;
     public vistaRest(){
         genera();
     
@@ -40,8 +41,6 @@ public class vistaRest {
     public void genera(){
         
         
-        
-        root= new VBox();
         
         VBox V = new VBox();
        
@@ -53,8 +52,8 @@ public class vistaRest {
       hbo.getChildren().addAll(b1,b2);
       hbo.setSpacing(25);
       hbo.setAlignment(Pos.CENTER);
-     V.getChildren().add(hbo);
-        s.getChildren().add(g1);
+  
+     s.getChildren().add(g1);
         int c = 0;
         int f = 0;
         Label l1 = new Label("ID");
@@ -120,9 +119,9 @@ public class vistaRest {
       V.setStyle("-fx-background-color:WHITE;");
       
      V.getChildren().add(s);
-      
+         V.getChildren().add(hbo);
      
- root.getChildren().add(V);
+root = new ScrollPane(V);
 
        b1.setStyle("-fx-font-size:20px;-fx-text-fill:white;-fx-background-color:darkslateblue;");
        b2.setStyle("-fx-font-size:20px;-fx-text-fill:white;-fx-background-color:darkslateblue;");
@@ -203,7 +202,7 @@ String ids = selectedRadioButton.getText();
         g1.setVgap(25);
         g1.setHgap(25);
     }
-    public VBox getRoot(){
+    public ScrollPane getRoot(){
         
         
         

@@ -20,7 +20,7 @@ public class Conexion {
         try {
             System.out.println("Exito");
             Class.forName("com.mysql.cj.jdbc.Driver");
-            con=DriverManager.getConnection("jdbc:mysql://localhost:3306/booking","root","roo");
+            con=DriverManager.getConnection("jdbc:mysql://localhost:3306/booking","root","root");
         } catch (Exception e) {
             System.err.println("Error:" +e);
         }

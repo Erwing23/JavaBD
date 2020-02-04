@@ -58,6 +58,10 @@ public class login {
            b1.getScene().setRoot(r.getRoot());
         
         });
+        b2.setOnAction(e->{
+            vistaRest r = new vistaRest();
+            b2.getScene().setRoot(r.getRoot());
+        });
     }
     public VBox getRoot(){
         

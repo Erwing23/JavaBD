@@ -8,10 +8,12 @@ package ventanas;
 import java.sql.Date;
 import java.sql.ResultSet;
 import java.sql.Statement;
-
+import java.util.Calendar;
 import javafx.geometry.Insets;
+
 import javafx.geometry.Orientation;
 import javafx.geometry.Pos;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.RadioButton;
@@ -25,6 +27,7 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
+import modelo.Cliente;
 import modelo.Conexion;
 import static ventanas.registro.c;
 
@@ -95,7 +98,7 @@ public class vistaRest {
                    RadioButton r1 = new RadioButton(idR);
                    r1.setToggleGroup(gb);
                    HBox h2 = new HBox();
-                   System.out.println("Encontrado");
+                   
                    g1.add(r1,c,f);
                     c+=1;
                    g1.add(new Label(nomR),c,f);
@@ -143,21 +146,31 @@ root = new ScrollPane(V);
              RadioButton selectedRadioButton = (RadioButton) gb.getSelectedToggle();
 String ids = selectedRadioButton.getText();
                
-             Stage sr = new Stage();
+            
             
       // INSTRUCCION SQL   
       Conexion cn3=new Conexion();
         Statement st3;
         ResultSet rs3;
         Statement u1;
-        
+        String rName=null;
+       
+        String puntos=null;
+        String Direccion=null;
         try {
             u1 = cn3.con.createStatement();
                 int ru1 = u1.executeUpdate("update Restaurante set MesasDisp=MesasDisp-1 where idRestaurante ='"+ids+"' ");
             System.out.println(ru1);
             st3=cn3.con.createStatement();
             rs3=st3.executeQuery("select * from Restaurante where idRestaurante ='"+ids+"' ");
-            while (rs3.next()) {  
+            while (rs3.next()) {
+                rName = rs3.getString("Nombre");
+                
+                puntos = rs3.getString("Puntuacion");
+                
+                
+                
+                Direccion = rs3.getString("Direccion");
                 
                
               
@@ -171,8 +184,9 @@ String ids = selectedRadioButton.getText();
          
         int rs; 
         String s2 = registro.c.getId();
-           Date s3 = new Date(0,0,0);
-           Date s31 = new Date(1,1,1);
+        int d=Integer.parseInt(s2);
+           java.sql.Date s3 = new java.sql.Date(Calendar.getInstance().getTime().getTime());
+          java.sql.Date s31 = new java.sql.Date(Calendar.getInstance().getTime().getTime());
            
            int s4 = 2004;
            int ide = 328;
@@ -183,7 +197,7 @@ String ids = selectedRadioButton.getText();
            //(`Reserva` (`idReserva`,`FechaLlegada`,`FechaSalida`,`idCliente`,`idEmpleado`) VALUES (1000,"20-01-06","20-02-03",269,328);
           
           
-            rs=st1.executeUpdate("INSERT INTO Reserva (idCliente,FechaLlegada,FechaSalida,idEmpleado) VALUES('" + s2 + "','" + s3 + "','" + s31 + "','" + ide + "' )");
+            rs=st1.executeUpdate("INSERT INTO Reserva (idCliente,FechaLlegada,FechaSalida,idEmpleado) VALUES('" + d + "','" + s3 + "','" + s31 + "','" + ide + "' )");
             System.out.println("insert");
             System.out.println(rs);
           
@@ -192,6 +206,7 @@ String ids = selectedRadioButton.getText();
         } catch (Exception a) {
             System.out.println(a.getMessage());
         }
+        Cliente clien = registro.c;
            
             
            VentanaPrincipal ventB = new VentanaPrincipal();
@@ -199,7 +214,33 @@ String ids = selectedRadioButton.getText();
                    
                    Stage sm = new Stage();
                    VBox vp = new VBox();
-                   Label lp = new Label("FELICIDADES HA CONFIRMADO SU");
+                   Label lp = new Label("FELICIDADES "+clien.getNombre() +"");
+                   Label lp1 = new Label("HA CONFIRMADO SU RESERVACION DE RESTAURANTE CON LOS DATOS: ");
+                   GridPane grid = new GridPane();
+                   Label lp2 = new Label("ID Cliente: "+clien.getId());
+                   Label lp3 = new Label("Nombre del Restaurante: "+rName);
+                   Label lp4 = new Label("Direccion: "+Direccion);
+                   Label lp5 = new Label("Puntuación: "+puntos);
+                   Label lp6 = new Label("Fecha de Reserva: "+s3);
+                   
+                   
+                   grid.add(lp,1,0);
+                   grid.add(lp1,1,1);
+                   grid.add(lp2,0,2);
+                   grid.add(lp3,0,3);
+                   grid.add(lp4,0,4);
+                   grid.add(lp5,0,5);
+                   grid.add(lp6,0,6);
+                   grid.setVgap(10);
+                   grid.setHgap(10);
+                   vp.getChildren().addAll(grid);
+                   vp.setAlignment(Pos.CENTER);
+                   vp.setPadding(new Insets(40,40,40,40));
+                   Scene sc= new Scene(vp,800,500);
+                   sm.setScene(sc);
+                   sm.setTitle("FELICIDADES");
+                   sm.show();
+                   
         } catch (Exception se) {
         }//
              

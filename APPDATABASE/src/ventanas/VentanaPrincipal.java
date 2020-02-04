@@ -21,6 +21,7 @@ import javafx.scene.layout.VBox;
 import modelo.Cliente;
 import modelo.TipoReservas;
 import java.time.LocalDate;
+import javafx.scene.Scene;
 import javafx.stage.Stage;
 import modelo.Reserva;
 
@@ -99,22 +100,39 @@ public class VentanaPrincipal {
         root.setSpacing(25);
         GridPane g1 = new GridPane();
          HBox hb = new HBox();
-         
+           HBox fe = new HBox();
+                 
         
         
        cmbEstado.setOnAction(e->{
            hb.getChildren().clear();
           g1.getChildren().clear();
+             fe.getChildren().clear();
             switch (cmbEstado.getSelectionModel().getSelectedItem().toString()) {
                 case "RESTAURANTE":
                     System.out.println("hello");
                      btnGuardar.setOnAction(a->{
+                         
                          vistaRest v = new vistaRest();
                          btnGuardar.getScene().setRoot(v.getRoot());
            
            
             
         });
+                     btnBuscar.setOnAction(a->{
+                         Stage sf = new Stage();
+                         finalVista vf = new finalVista();
+                         Scene scf = new Scene(vf.getRoot(),500,500);
+                         sf.setScene(scf);
+                         sf.setTitle("RESERVAS");
+                         sf.show();
+                     
+                    
+                     
+                     });
+                     
+                     
+                     
                     break;
                 case "HOTEL":
                     HBox h = new HBox();
@@ -122,11 +140,65 @@ public class VentanaPrincipal {
                     TextField t1= new TextField();
                     h.getChildren().addAll(l2,t1);
                     hb.getChildren().add(h);
+                      btnBuscar.setOnAction(a->{
+                         Stage sf = new Stage();
+                         finalVista vf = new finalVista();
+                         Scene scf = new Scene(vf.getRoot(),500,500);
+                         sf.setScene(scf);
+                         sf.setTitle("RESERVAS");
+                         sf.show();
+                     
+                    
+                     
+                     });
+                     btnGuardar.setOnAction(a->{
+                         String text =t1.getText();
+                         
+                         vistaHotel v = new vistaHotel(text);
+                         btnGuardar.getScene().setRoot(v.getRoot());
+           
+           
+            
+        });
                     break;
                 case "VUELO":
-                     btnGuardar.setOnAction(a->{
-                         viewVuelo v = new viewVuelo();
+                    
+                  
+                    Label l1 = new Label("Fecha de salida:");
+                      btnBuscar.setOnAction(a->{
+                         Stage sf = new Stage();
+                         finalVista vf = new finalVista();
+                         Scene scf = new Scene(vf.getRoot(),500,500);
+                         sf.setScene(scf);
+                         sf.setTitle("RESERVAS");
+                         sf.show();
+                     
+                    
+                     
+                     });
+                    Label l11 = new Label("Fecha de llegada:");
+                   DatePicker fs = new DatePicker();
+                    
+                    DatePicker fl = new DatePicker();
+                    fe.getChildren().addAll(l1,fs,l11,fl);
+                    
+                    fe.setSpacing(20);
+                   
+                    fe.setAlignment(Pos.CENTER);
+                    btnGuardar.setOnAction(a->{
+                         LocalDate fechLlegada = (LocalDate) fl.getValue();
+        LocalDate fechSalida = (LocalDate) fs.getValue();
+                        if(fechLlegada!=null || fechSalida!=null){
+                        viewVuelo v = new viewVuelo();
                          btnGuardar.getScene().setRoot(v.getRoot());
+                        }else{ Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Error Dialog");
+            alert.setHeaderText("Ingreso de Reserva");
+            alert.setContentText("Todos los campos son obligatorios");
+            alert.showAndWait();
+                        
+                        }
+                         
            
            
             
@@ -141,6 +213,7 @@ public class VentanaPrincipal {
        });
         root.getChildren().add(hb);
          hb.setAlignment(Pos.CENTER);
+         root.getChildren().add(fe);
        root.setSpacing(25);
          root.setAlignment(Pos.CENTER);
          g1.setAlignment(Pos.CENTER);

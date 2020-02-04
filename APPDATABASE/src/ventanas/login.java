@@ -59,7 +59,7 @@ public class login {
         
         });
         b2.setOnAction(e->{
-            vistaRest r = new vistaRest();
+            Ingreso r = new Ingreso();
             b2.getScene().setRoot(r.getRoot());
         });
     }

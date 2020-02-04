@@ -33,7 +33,7 @@ public class Conexion {
             st=cn.con.createStatement();
             rs=st.executeQuery("select * from cliente");
             while (rs.next()) {   
-                System.out.println(rs.getClass());
+               
               //  System.out.println(rs.getInt("idAerolinea")+" " +rs.getString("idAvion")+" " +rs.getString("Nombre"));
             }
             cn.con.close();

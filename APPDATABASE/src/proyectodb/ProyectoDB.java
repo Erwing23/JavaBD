@@ -39,8 +39,7 @@ public class ProyectoDB extends Application {
         }catch(Exception e){
             System.out.println("Error en la conexión");
     }*/
-      VentanaPrincipal ventp = new VentanaPrincipal();
-     viewVuelo vuelos = new viewVuelo();
+    
      login log = new login();
         //Scene scene = new Scene(ventp.getRoot(),900,800);
         //Scene scene = new Scene(vuelos.getRoot(),900,800);

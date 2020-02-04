@@ -124,6 +124,13 @@ public class VentanaPrincipal {
                     hb.getChildren().add(h);
                     break;
                 case "VUELO":
+                     btnGuardar.setOnAction(a->{
+                         viewVuelo v = new viewVuelo();
+                         btnGuardar.getScene().setRoot(v.getRoot());
+           
+           
+            
+        });
                     break;
                 default:
                     break;

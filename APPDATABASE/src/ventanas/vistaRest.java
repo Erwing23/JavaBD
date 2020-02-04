@@ -110,7 +110,10 @@ public class vistaRest {
               //  System.out.println(rs.getInt("idAerolinea")+" " +rs.getString("idAvion")+" " +rs.getString("Nombre"));
             }
             
-            cn2.con.close();
+            
+           
+            
+          
             
             
           
@@ -139,7 +142,7 @@ root = new ScrollPane(V);
               
              RadioButton selectedRadioButton = (RadioButton) gb.getSelectedToggle();
 String ids = selectedRadioButton.getText();
-             System.out.println(ids+" ID=");
+               
              Stage sr = new Stage();
             
       // INSTRUCCION SQL   
@@ -189,6 +192,10 @@ String ids = selectedRadioButton.getText();
             
            VentanaPrincipal ventB = new VentanaPrincipal();
                    b1.getScene().setRoot(ventB.getRoot());
+                   
+                   Stage sm = new Stage();
+                   VBox vp = new VBox();
+                   Label lp = new Label();
         } catch (Exception se) {
         }//
              
